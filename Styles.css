@@ -23,7 +23,7 @@ html {
   min-height: 100vh;
   font-family: "Poppins", sans-serif;
   color: #fff;
-  background: linear-gradient(135deg, #000000, #010c31);
+  background: linear-gradient(135deg, #000000, #000820);
 }
 
 body::before {
@@ -110,6 +110,9 @@ main,
 
 /* =========================================================
    3. Hero and equations
+   (updated: centred layout, gradient surname, buttons,
+   orbit rings, scroll cue and fade-in. The equations
+   overlay below is unchanged.)
 ========================================================= */
 
 .hero {
@@ -118,15 +121,17 @@ main,
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  text-align: left;
+  text-align: center;                 /* was left */
   position: relative;
   overflow: hidden;
   padding: 3rem 1.5rem;
 }
 
 .hero h1 {
-  font-size: clamp(2.5rem, 8vw, 6rem);
-  margin: 0;
+  font-size: clamp(2.8rem, 9vw, 6.5rem);   /* slightly bigger, name sits on two lines */
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  margin: 0.4rem 0 1rem;
 }
 
 .hero-text {
@@ -134,6 +139,7 @@ main,
   z-index: 2;
   margin: auto 0;
   padding: 8rem 0 3rem;
+  max-width: 56rem;
 }
 
 .eyebrow {
@@ -153,6 +159,158 @@ main,
   color: #fff;
 }
 
+/* --- NEW: gradient surname on its own line
+       (remove "display: block" to keep the name on one line) --- */
+.grad {
+  display: block;
+  background: linear-gradient(90deg, #9fd8ff, #4cc3ff 50%, #b9a6ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* --- NEW: tagline under the name --- */
+.tagline {
+  margin: 0 auto 2rem;
+  font-size: clamp(1.05rem, 2vw, 1.4rem);
+  color: #cfe6ff;
+}
+
+/* --- NEW: hero buttons --- */
+.cta {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.btn {
+  padding: 0.8rem 1.7rem;
+  border-radius: 999px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #4cc3ff, #2a6cff);
+  color: #04101f;
+  box-shadow: 0 0 24px rgba(76, 195, 255, 0.35);
+}
+
+.btn-primary:hover {
+  color: #04101f;
+  transform: translateY(-2px);
+  box-shadow: 0 0 34px rgba(76, 195, 255, 0.6);
+}
+
+.btn-ghost {
+  border: 1px solid rgba(159, 216, 255, 0.5);
+  color: #cfe6ff;
+}
+
+.btn-ghost:hover {
+  background: rgba(159, 216, 255, 0.12);
+  color: #fff;
+}
+
+/* --- NEW: slow orbit rings behind the name.
+       The 2.5rem offset matches the difference between the
+       hero-text's top (8rem) and bottom (3rem) padding. --- */
+.orbits {
+  position: absolute;
+  top: calc(50% + 2.5rem);
+  left: 50%;
+  width: min(92vw, 760px);
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  z-index: -1;                        /* behind the text, inside .hero-text */
+  pointer-events: none;
+}
+
+.ring {
+  position: absolute;
+  inset: 0;
+  border: 1px dashed rgba(159, 216, 255, 0.22);
+  border-radius: 50%;
+  animation: spin 60s linear infinite;
+}
+
+.ring-2 {
+  inset: 14%;
+  border-color: rgba(159, 216, 255, 0.15);
+  animation-duration: 40s;
+  animation-direction: reverse;
+}
+
+/* the little planet riding on each ring */
+.ring::after {
+  content: "";
+  position: absolute;
+  top: -5px;
+  left: 50%;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #9fd8ff;
+  box-shadow: 0 0 12px #4cc3ff;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* --- NEW: scroll cue at the bottom of the hero --- */
+.scroll-cue {
+  position: absolute;
+  bottom: 1.2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  color: #9fd8ff;
+  text-decoration: none;
+  font-size: 0.75rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+}
+
+.scroll-cue::after {
+  content: "";
+  width: 1px;
+  height: 2.5rem;
+  background: linear-gradient(#9fd8ff, transparent);
+  animation: drip 1.8s ease-in-out infinite;
+}
+
+@keyframes drip {
+  0%   { transform: scaleY(0); transform-origin: top; }
+  50%  { transform: scaleY(1); transform-origin: top; }
+  51%  { transform: scaleY(1); transform-origin: bottom; }
+  100% { transform: scaleY(0); transform-origin: bottom; }
+}
+
+/* --- NEW: hero text fades up one line at a time on page load
+       (children: 1 orbits, 2 eyebrow, 3 name, 4 tagline, 5 buttons) --- */
+.hero-text > :not(.orbits) {
+  opacity: 0;
+  transform: translateY(18px);
+  animation: rise 0.8s ease-out forwards;
+}
+
+.hero-text > :nth-child(2) { animation-delay: 0.1s; }
+.hero-text > :nth-child(3) { animation-delay: 0.25s; }
+.hero-text > :nth-child(4) { animation-delay: 0.4s; }
+.hero-text > :nth-child(5) { animation-delay: 0.55s; }
+
+@keyframes rise {
+  to { opacity: 1; transform: none; }
+}
+
+/* --- equations overlay (unchanged) --- */
 .equations_section {
   position: absolute;
   inset: 0 0 auto;
@@ -187,6 +345,8 @@ main,
 
 /* =========================================================
    4. Navigation
+   (updated: only the .brand rule is new. Move the <nav>
+   above the <header> in the HTML so it sits at the top.)
 ========================================================= */
 
 .navbar {
@@ -213,6 +373,14 @@ main,
 .navbar a:hover {
   color: #fff;
   text-shadow: 0 0 8px #4cc3ff;
+}
+
+/* NEW: your name on the left, links stay on the right */
+.navbar .brand {
+  margin-right: auto;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #fff;
 }
 
 /* =========================================================
@@ -491,7 +659,86 @@ p {
 /* =========================================================
    9. Contact and footer
 ========================================================= */
+.contact-grid {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: 1.2rem;
+}
 
+.contact-grid li {
+  position: relative;               /* the Copy button is placed inside this */
+}
+
+.contact-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  height: 100%;
+  padding: 1.4rem 1.3rem;
+  border-radius: 14px;
+  border: 1px solid rgba(159, 216, 255, 0.25);
+  background: rgba(10, 14, 35, 0.6);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  color: inherit;
+  text-decoration: none;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.contact-card:hover,
+.contact-card:focus-visible {
+  transform: translateY(-5px);
+  border-color: rgba(159, 216, 255, 0.7);
+  box-shadow: 0 12px 30px rgba(76, 195, 255, 0.25);
+}
+
+.contact-card svg {
+  width: 30px;
+  height: 30px;
+  margin-bottom: 0.6rem;
+  fill: none;
+  stroke: #9fd8ff;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.contact-label {
+  font-weight: 600;
+  font-size: 1.05rem;
+}
+
+.contact-value {
+  color: #a9bddb;
+  font-size: 0.9rem;
+  overflow-wrap: anywhere;          /* long emails wrap instead of overflowing */
+}
+
+/* small Copy button in the corner of the email card */
+.copy-btn {
+  position: absolute;
+  top: 0.9rem;
+  right: 0.9rem;
+  padding: 0.25rem 0.7rem;
+  border-radius: 999px;
+  border: 1px solid rgba(159, 216, 255, 0.5);
+  background: rgba(7, 11, 26, 0.85);
+  color: #cfe6ff;
+  font: inherit;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.copy-btn:hover { background: rgba(159, 216, 255, 0.18); }
+
+.copy-btn:focus-visible {
+  outline: 3px solid #9fd8ff;
+  outline-offset: 2px;
+}
 .footer {
   text-align: center;
   padding: 3rem 1rem;
@@ -528,8 +775,20 @@ p {
     padding-top: 10rem;
   }
 
+  /* NEW: keeps the rings centred on the name (10rem top - 3rem bottom) / 2 */
+  .orbits {
+    top: calc(50% + 3.5rem);
+  }
+
   .navbar {
     justify-content: center;
+  }
+
+  /* NEW: name goes on its own line above the links on phones */
+  .navbar .brand {
+    margin-right: 0;
+    flex-basis: 100%;
+    text-align: center;
   }
 
   .equations_section {
@@ -567,5 +826,17 @@ p {
 
   .stars {
     transition: none;
+  }
+
+  /* NEW: stop the new hero animations too */
+  .ring,
+  .scroll-cue::after {
+    animation: none;
+  }
+
+  .hero-text > :not(.orbits) {
+    animation: none;
+    opacity: 1;
+    transform: none;
   }
 }
