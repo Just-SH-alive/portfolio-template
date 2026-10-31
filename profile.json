@@ -15,8 +15,8 @@
 
   "hero": {
     "eyebrow": "COMPUTER SCIENCE × COSMOS",
-    "name": "Shreehari",
-    "tagline": "CS student, future astrophysicist.",
+    "name": "Shreehari Sajankumar",
+    "tagline": "CS student, Aspiring  astrophysicist.",
     "link": { "label": "Explore my universe ↓", "href": "#about" },
     "photo": { "src": "images/me.png", "alt": "Portrait of Shreehari" },
     "equations": [

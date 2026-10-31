@@ -12,7 +12,7 @@ resize();
 window.addEventListener("resize", resize);
 
 // each star remembers its "home" position (hx, hy)
-for (let i = 0; i < 2000; i++) {
+for (let i = 0; i < 1000; i++) {
   const x = Math.random() * w;
   const y = Math.random() * h;
   stars.push({ hx: x, hy: y, x: x, y: y, r: Math.random() * 1.5 + 0.5 });
