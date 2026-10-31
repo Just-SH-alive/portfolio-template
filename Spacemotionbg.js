@@ -27,7 +27,7 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
 // 2. Create star positions and colours
-const starCount = 100000;
+const starCount = 10000;
 const positions = new Float32Array(starCount * 3);
 const colors = new Float32Array(starCount * 3);
 
