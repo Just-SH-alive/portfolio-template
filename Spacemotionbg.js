@@ -27,7 +27,7 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
 // 2. Create star positions and colours
-const starCount = 1000;
+const starCount = 5000;
 const positions = new Float32Array(starCount * 3);
 const colors = new Float32Array(starCount * 3);
 
@@ -63,13 +63,13 @@ geometry.setAttribute(
 
 // 4. Star appearance
 const material = new THREE.PointsMaterial({
-  size: 0.35,
+  size: 0.25,
   sizeAttenuation: true,
   depthWrite: false,
   blending: THREE.AdditiveBlending,
   vertexColors: true,
   transparent: true,
-  opacity: 0.9
+  opacity: 0.65
 });
 
 // 5. Add stars to scene
