@@ -1,35 +1,166 @@
-<!doctype html>
+
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>My Portfolio</title>
-  <link rel="stylesheet" href="style.css">
-</head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<body>
-  <header class="hero">
-    <h1 id="name"></h1>
-    <p id="tagline"></p>
-    <nav id="links"></nav>
+  <meta name="theme-color" content="#070b1a">
+  <meta name="description"
+        content="Shreehari's portfolio — Computer Science student exploring astrophysics, programming, and computational science.">
+
+  <title>Shreehari SajanKumar | CS Student & Future Astrophysicist </title>
+
+  <link rel="stylesheet" href="Styles.css">
+  <link rel="alternate" type="application/json" href="profile.json">
+</head>   
+<script src="scripts.js"></script>
+
+<body class="bgsetting">
+  <!-- Start trail following the mouse-->
+  <div class="space" aria-hidden="true">
+  <div class="stars stars-far"></div>
+  <div class="stars stars-near"></div>
+</div>  
+
+  <!-- Hero Section -->
+  <header class="hero" id="top">
+<section class="equations_section">
+    <div class="equations" aria-hidden="true">
+      <span>E = mc²</span>
+      <span>F = G·m₁m₂ / r²</span>
+      <span>R<sub>s</sub> = 2GM / c²</span>
+      <span>λ = h / p</span>
+      <span>E = hν</span>
+      <span>a² + b² = c²</span>
+      <span>pV = nRT</span>
+      <span>(A^B)' = (A')^B</span>
+      <span>ΔxΔp ≥ ħ/2</span>
+      <span>v = √(GM / r)</span>
+      <span>3.8 × 10⁸ m</span>
+      <span>H₀ ≈ 70 km/s/Mpc</span>
+    </div>
+  </section>
+    <div class="hero-text">
+      <p class="eyebrow">COMPUTER SCIENCE × COSMOS</p>
+      <h1>Shreehari</h1>
+      <p>CS student, future astrophysicist.</p>
+      <a class="hero-link" href="#about">Explore my universe ↓</a>
+    </div>
+
+    <img
+      class="sticker"
+      src="images/me.png"
+      alt="Portrait of Shreehari"
+      fetchpriority="high"
+    >
+
   </header>
-  <main>
-    <section>
-      <h2>About</h2>
-      <p id="bio"></p>
-    </section>
-    <section>
-      <h2>Skills</h2>
-      <ul id="skills" class="chips"></ul>
-    </section>
-    <section>
-      <h2>Projects</h2>
-      <div id="projects" class="grid"></div>
-    </section>
-  </main>
-  <footer id="footer"></footer>
-  <script src="script.js"></script>
-</body>
 
+  <!-- Navigation -->
+  <nav class="navbar" aria-label="Main navigation">
+    <a href="#top">Home</a>
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#expertise">Expertise</a>
+    <a href="#achievements">Certificates</a>
+  </nav>
+
+  <main>
+
+  
+    <section id="about">
+      <h2>About me</h2>
+
+      <p>
+        Hey, I'm Shreehari, a computer science student exploring the
+        intersection of technology and astrophysics. I'm interested in
+        full-stack development, Theoretical Physics and computational astrophysics, and I enjoy
+        discovering how programming and mathematics can help us understand
+        the universe.
+      </p>
+
+      <p>
+        I'm constantly learning, experimenting with new ideas, and building
+        my technical foundation. My goal is to contribute to meaningful
+        projects in technology and, eventually, explore the universe through
+        computational science.
+      </p>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills">
+      <h2>Skills</h2>
+
+      <ul class="chips">
+        <li>Java</li>
+        <li>HTML</li>
+        <li>CSS</li>
+        <li>Spring Boot</li>
+        <li>Git</li>
+        <li>Python</li>
+      </ul>
+    </section>
+
+    <!-- Expertise -->
+    <section id="expertise">
+      <h2>Areas of interest</h2>
+
+      <div class="cards">
+
+        <article class="card">
+          <h3>Backend development</h3>
+          <p>
+            Exploring server-side development, application architecture,
+            APIs, and database integration through software projects.
+          </p>
+        </article>
+
+        <article class="card">
+          <h3>Computational astrophysics</h3>
+          <p>
+            Exploring how programming, numerical methods, and data
+            visualization can help model and investigate astronomical
+            phenomena.
+          </p>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- Achievements -->
+    <section id="achievements">
+      <h2>Achievements & certificates</h2>
+
+      <div class="cards">
+
+        <a
+          class="card cert"
+          href="images/certs/nptel.jpg"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            src="images/certs/nptel.jpg"
+            alt="NPTEL certificate"
+            loading="lazy"
+          >
+          <h3>NPTEL Certificate</h3>
+          <p>Add the course name, issuer, and year.</p>
+        </a>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>Made with curiosity and a little cosmic inspiration.</p>
+    <a href="#top">Back to the top ↑</a>
+  </footer>
+
+  <script src="Scripts.js"></script>
+  <script src="equationsflow.js"></script>
+</body>
 </html>

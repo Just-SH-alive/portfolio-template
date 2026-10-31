@@ -1,19 +1,83 @@
 {
-    "name": "Your Name",
-    "tagline": "Your one-line introduction",
-    "bio": "Write 2 or 3 sentences about yourself.",
-    "skills": [
-        "Git",
-        "HTML"
-    ],
-    "projects": [
-        {
-            "title": "My first project",
-            "desc": "What it does.",
-            "link": "https://github.com/yourname"
-        }
-    ],
-    "links": {
-        "github": "https://github.com/yourname"
-    }
+  "site": {
+    "title": "Shreehari SajanKumar | CS Student & Future Astrophysicist",
+    "description": "Shreehari's portfolio — Computer Science student exploring astrophysics, programming, and computational science.",
+    "themeColor": "#070b1a"
+  },
+
+  "nav": [
+    { "label": "Home", "href": "#top" },
+    { "label": "About", "href": "#about" },
+    { "label": "Skills", "href": "#skills" },
+    { "label": "Expertise", "href": "#expertise" },
+    { "label": "Certificates", "href": "#achievements" }
+  ],
+
+  "hero": {
+    "eyebrow": "COMPUTER SCIENCE × COSMOS",
+    "name": "Shreehari",
+    "tagline": "CS student, future astrophysicist.",
+    "link": { "label": "Explore my universe ↓", "href": "#about" },
+    "photo": { "src": "images/me.png", "alt": "Portrait of Shreehari" },
+    "equations": [
+      "E = mc²",
+      "F = G·m₁m₂ / r²",
+      "Rₛ = 2GM / c²",
+      "λ = h / p",
+      "E = hν",
+      "a² + b² = c²",
+      "pV = nRT",
+      "(A^B)' = (A')^B",
+      "ΔxΔp ≥ ħ/2",
+      "v = √(GM / r)",
+      "3.8 × 10⁸ m",
+      "H₀ ≈ 70 km/s/Mpc"
+    ]
+  },
+
+  "about": {
+    "heading": "About me",
+    "paragraphs": [
+      "Hey, I'm Shreehari, a computer science student exploring the intersection of technology and astrophysics. I'm interested in full-stack development, Theoretical Physics and computational astrophysics, and I enjoy discovering how programming and mathematics can help us understand the universe.",
+      "I'm constantly learning, experimenting with new ideas, and building my technical foundation. My goal is to contribute to meaningful projects in technology and, eventually, explore the universe through computational science."
+    ]
+  },
+
+  "skills": {
+    "heading": "Skills",
+    "items": ["Java", "HTML", "CSS", "Spring Boot", "Git", "Python"]
+  },
+
+  "expertise": {
+    "heading": "Areas of interest",
+    "items": [
+      {
+        "title": "Backend development",
+        "description": "Exploring server-side development, application architecture, APIs, and database integration through software projects."
+      },
+      {
+        "title": "Computational astrophysics",
+        "description": "Exploring how programming, numerical methods, and data visualization can help model and investigate astronomical phenomena."
+      }
+    ]
+  },
+
+  "achievements": {
+    "heading": "Achievements & certificates",
+    "items": [
+      {
+        "title": "NPTEL Certificate",
+        "description": "Add the course name, issuer, and year.",
+        "image": "images/certs/nptel.jpg",
+        "alt": "NPTEL certificate",
+        "link": "images/certs/nptel.jpg"
+      }
+    ]
+  },
+
+  "footer": {
+    "text": "Made with curiosity and a little cosmic inspiration.",
+    "backLabel": "Back to the top ↑",
+    "backHref": "#top"
+  }
 }
