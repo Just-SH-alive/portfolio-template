@@ -1,55 +1,51 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <meta name="theme-color" content="#070b1a">
   <meta name="description"
         content="Shreehari's portfolio — Computer Science student exploring astrophysics, programming, and computational science.">
 
-  <title>Shreehari SajanKumar | CS Student & Future Astrophysicist </title>
-
+  <title>Shreehari SajanKumar | CS Student &amp; Future Astrophysicist</title>
   <link rel="stylesheet" href="Styles.css">
   <link rel="alternate" type="application/json" href="profile.json">
-</head>   
-<script src="scripts.js"></script>
+</head>
 
 <body class="bgsetting">
-
-  <!-- Start trail following the mouse-->
-   
+  <!-- Background layers -->
   <div class="space" aria-hidden="true">
-  <div class="stars stars-far"></div>
-  <div class="stars stars-near"></div>
-</div>  
+    <div class="stars stars-far"></div>
+    <div class="stars stars-near"></div>
+  </div>
+  <canvas id="starfield" aria-hidden="true"></canvas>
+  <canvas id="comet" aria-hidden="true"></canvas>
 
-  <!-- Hero Section -->
+  <!-- Hero -->
   <header class="hero" id="top">
-<section class="equations_section">
-    <div class="equations" aria-hidden="true">
-      <span>E = mc²</span>
-      <span>F = G·m₁m₂ / r²</span>
-      <span>R<sub>s</sub> = 2GM / c²</span>
-      <span>λ = h / p</span>
-      <span>E = hν</span>
-      <span>a² + b² = c²</span>
-      <span>pV = nRT</span>
-      <span>(A^B)' = (A')^B</span>
-      <span>ΔxΔp ≥ ħ/2</span>
-      <span>v = √(GM / r)</span>
-      <span>3.8 × 10⁸ m</span>
-      <span>H₀ ≈ 70 km/s/Mpc</span>
-    </div>
-  </section>
+    <section class="equations_section" aria-hidden="true">
+      <div class="equations">
+        <span>E = mc²</span>
+        <span>F = G·m₁m₂ / r²</span>
+        <span>R<sub>s</sub> = 2GM / c²</span>
+        <span>λ = h / p</span>
+        <span>E = hν</span>
+        <span>a² + b² = c²</span>
+        <span>pV = nRT</span>
+        <span>(A^B)' = (A')^B</span>
+        <span>ΔxΔp ≥ ħ/2</span>
+        <span>v = √(GM / r)</span>
+        <span>3.8 × 10⁸ m</span>
+        <span>H₀ ≈ 70 km/s/Mpc</span>
+      </div>
+    </section>
+
     <div class="hero-text">
       <p class="eyebrow">COMPUTER SCIENCE × COSMOS</p>
       <h1>Shreehari Sajankumar</h1>
       <p>CS student, Aspiring astrophysicist.</p>
       <a class="hero-link" href="#about">Explore my universe ↓</a>
     </div>
-
   </header>
 
   <!-- Navigation -->
@@ -57,63 +53,118 @@
     <a href="#top">Home</a>
     <a href="#about">About</a>
     <a href="#skills">Skills</a>
-    <a href="#expertise">Expertise</a>
+    <a href="#expertise">Areas of Interest</a>
     <a href="#achievements">Certificates</a>
   </nav>
 
   <main>
-
-  
-    <section id="about">
+    <!-- About -->
+    <section id="about" class="about-section">
       <h2>About me</h2>
-
-      <p>
-        Hey, I'm Shreehari, a computer science student exploring the
-        intersection of technology and astrophysics. I'm interested in
-        full-stack development, Theoretical Physics and computational astrophysics, and I enjoy
-        discovering how programming and mathematics can help us understand
-        the universe.
-      </p>
-
-      <p>
-        I'm constantly learning, experimenting with new ideas, and building
-        my technical foundation. My goal is to contribute to meaningful
-        projects in technology and, eventually, explore the universe through
-        computational science.
-      </p>
-      <img
-      class="sticker"
-      src="images/me.png"
-      alt="Portrait of Shreehari"
-      fetchpriority="high"
-    >
+      <div class="about-layout">
+        <div class="about-copy">
+          <p>
+            Yooo, I'm Shreehari, a Computer science student exploring the
+            intersection of technology and astrophysics. I'm interested in
+            full-stack development, Theoretical Physics and computational astrophysics, and I enjoy
+            discovering how programming and mathematics can help us understand
+            the universe.
+          </p>
+          <p>
+            I'm constantly learning, experimenting with new ideas, and building
+            my technical foundation. My goal is to contribute to meaningful
+            projects in technology and, eventually, explore the universe through
+            computational science.
+          </p>
+        </div>
+        <img class="about-photo" src="images/Shreehari.jpg"
+             alt="Portrait of Shreehari" loading="lazy">
+      </div>
     </section>
 
     <!-- Skills -->
     <section id="skills">
       <h2>Skills</h2>
+      <ul class="skill-grid">
+        <li class="skill" style="--level: 60%">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/java/java-original.svg" alt="" width="48" height="48">
+          <h3>Java</h3>
+          <p class="level">Intermediate</p>
+          <div class="bar" aria-hidden="true"><span></span></div>
+        </li>
 
-      <ul class="chips">
-        <li>Java</li>
-        <li>HTML</li>
-        <li>CSS</li>
-        <li>Spring Boot</li>
-        <li>Git</li>
-        <li>Python</li>
+        <li class="skill" style="--level: 65%">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/html5/html5-original.svg" alt="" width="48" height="48">
+          <h3>HTML</h3>
+          <p class="level">Intermediate</p>
+          <div class="bar" aria-hidden="true"><span></span></div>
+        </li>
+
+        <li class="skill" style="--level: 75%">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/css3/css3-original.svg" alt="" width="48" height="48">
+          <h3>CSS</h3>
+          <p class="level">Intermediate</p>
+          <div class="bar" aria-hidden="true"><span></span></div>
+        </li>
+
+        <li class="skill" style="--level: 35%">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/javascript/javascript-original.svg" alt="" width="48" height="48">
+          <h3>JavaScript</h3>
+          <p class="level">Beginner</p>
+          <div class="bar" aria-hidden="true"><span></span></div>
+        </li>
+
+        <li class="skill" style="--level: 55%">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/spring/spring-original.svg" alt="" width="48" height="48">
+          <h3>Spring Boot</h3>
+          <p class="level">Intermediate</p>
+          <div class="bar" aria-hidden="true"><span></span></div>
+        </li>
+
+        <li class="skill" style="--level: 70%">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/git/git-original.svg" alt="" width="48" height="48">
+          <h3>Git</h3>
+          <p class="level">Intermediate</p>
+          <div class="bar" aria-hidden="true"><span></span></div>
+        </li>
+
+        <li class="skill" style="--level: 65%">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/python/python-original.svg" alt="" width="48" height="48">
+          <h3>Python</h3>
+          <p class="level">Intermediate</p>
+          <div class="bar" aria-hidden="true"><span></span></div>
+        </li>
+        <li class="skill" style="--level: 50%">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/cplusplus/cplusplus-original.svg" alt="" width="48" height="48">
+          <h3>C++</h3>
+          <p class="level">Intermediate</p>
+          <div class="bar" aria-hidden="true"><span></span></div>
+        </li>
+      </ul>
+      <h2>Other Co-curricular Skills</h2>
+      <ul class="skill-grid">
+        <li class="skill" style="--level: 50%"> <h3>Singing</h3><p class="level">Amature</p><div class="bar" aria-hidden="true"><span></span></div></li>
+        <li class="skill" style="--level: 60%"> <h3>Dance</h3><p class="level">Amature</p><div class="bar" aria-hidden="true"><span></span></div></li>
+        <li class="skill" style="--level: 55%"> <h3>Drawing</h3><p class="level">Amature</p><div class="bar" aria-hidden="true"><span></span></div></li>
       </ul>
     </section>
 
-    <!-- Expertise -->
+    <!-- Areas of interest -->
     <section id="expertise">
       <h2>Areas of interest</h2>
-
       <div class="cards">
+        <article class="card">
+          <h3>Full-stack development</h3>
+          <p>
+            Building responsive web applications using modern frameworks and
+            best practices, with a focus on user experience and performance.
+          </p>
+        </article>
 
         <article class="card">
-          <h3>Backend development</h3>
+          <h3>AI-ML</h3>
           <p>
-            Exploring server-side development, application architecture,
-            APIs, and database integration through software projects.
+            Exploring how
           </p>
         </article>
 
@@ -125,56 +176,62 @@
             phenomena.
           </p>
         </article>
-
       </div>
     </section>
 
     <!-- Achievements -->
     <section id="achievements">
-  <h2>Achievements &amp; certificates</h2>
+      <h2>Achievements &amp; certificates</h2>
+      <div class="cert-grid">
+        <figure class="cert-card">
+          <button class="cert-open" type="button"
+                  data-full="images/Certificates/nptel.jpg"
+                  data-title="NPTEL Certificate">
+            <img src="images/Certificates/nptel.png" alt="NPTEL certificate" loading="lazy">
+            <span class="cert-hint">View full size ⤢</span>
+          </button>
+          <figcaption>
+            <h3>NPTEL Certificate</h3>
+            <p>Completed the NPTEL course "Joy of Computing in Python" in 2026.</p>
+          </figcaption>
+        </figure>
 
-  <div class="cert-grid">
+        <figure class="cert-card">
+          <button class="cert-open" type="button"
+                  data-full="images/Certificates/yess.png"
+                  data-title="IEEE YESS Certificate">
+            <img src="images/Certificates/yess.png" alt="IEEE YESS certificate" loading="lazy">
+            <span class="cert-hint">View full size ⤢</span>
+          </button>
+          <figcaption>
+            <h3>IEEE YESS Certificate</h3>
+            <p>Participated in the IEEE YESS workshop in 2025.</p>
+          </figcaption>
+        </figure>
+        
+        <figure class="cert-card">
+          <button class="cert-open" type="button"
+                  data-full="images/Certificates/yess.png"
+                  data-title="IEEE YESS Certificate">
+            <img src="" alt="ISO certificate" loading="lazy">
+            <span class="cert-hint">View full size ⤢</span>
+          </button>
+          <figcaption>
+            <h3>ISO Certificate</h3>
+            <p>Participated and achieve A grade in the International Space Olympiad 2024.</p>
+          </figcaption>
+        </figure>
 
-    <figure class="cert-card">
-      <button
-        class="cert-open"
-        type="button"
-        data-full="images/Certificates/nptel.jpg"
-        data-title="NPTEL Certificate"
-      >
-        <img src="images/Certificates/nptel.png" alt="NPTEL certificate" loading="lazy">
-        <span class="cert-hint">View full size ⤢</span>
-      </button>
-      <figcaption>
-        <h3>NPTEL Certificate</h3>
-        <p>Completed the NPTEL course "Joy of Computing in Python" in 2026.</p>
-      </figcaption>
-    </figure>
+      </div>
+    </section>
 
-    <figure class="cert-card">
-      <button
-        class="cert-open"
-        type="button"
-        data-full="images/Certificates/yess.png"
-        data-title="IEEE YESS Certificate"
-      >
-        <img src="images/Certificates/yess.png" alt="IEEE YESS certificate" loading="lazy">
-        <span class="cert-hint">View full size ⤢</span>
-      </button>
-      <figcaption>
-        <h3>IEEE YESS Certificate</h3>
-        <p>Participated in the IEEE YESS workshop in 2025.</p>
-      </figcaption>
-    </figure>
-
-  </div>
-</section>
-    <section> 
-    <div class="contact">
-      <h2> Contact </h2>
-      <p>Feel free to reach out to me via email or connect with me on LinkedIn.</p>
-
-  </div>
+    <!-- Contact -->
+    <section id="contact">
+      <div class="contact">
+        <h2>Contact</h2>
+        <p>Feel free to reach out to me via email or connect with me on LinkedIn.</p>
+      </div>
+    </section>
   </main>
 
   <!-- Footer -->
@@ -183,7 +240,10 @@
     <a href="#top">Back to the top ↑</a>
   </footer>
 
-  <script src="Scripts.js"></script>
+  <!-- Scripts: load after the page elements they use -->
   <script src="equationsflow.js"></script>
+  <script src="Scripts.js"></script>
+  <script src="CometTrail.js"></script>
+  <script type="module" src="Spacemotionbg.js"></script>
 </body>
 </html>

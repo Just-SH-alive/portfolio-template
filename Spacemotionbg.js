@@ -1,51 +1,110 @@
-const canvas = document.getElementById("stars");
-const ctx = canvas.getContext("2d");
-let w, h;
-const mouse = { x: -9999, y: -9999 };
-const stars = [];
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js';
 
-function resize() {
-  w = canvas.width = window.innerWidth;
-  h = canvas.height = window.innerHeight;
-}
-resize();
-window.addEventListener("resize", resize);
+// 1. Scene, camera and renderer
+const canvas = document.querySelector('#starfield');
 
-// each star remembers its "home" position (hx, hy)
-for (let i = 0; i < 1000; i++) {
-  const x = Math.random() * w;
-  const y = Math.random() * h;
-  stars.push({ hx: x, hy: y, x: x, y: y, r: Math.random() * 1.5 + 0.5 });
+if (!canvas) {
+  throw new Error('The #starfield canvas was not found in index.html');
 }
 
-document.addEventListener("mousemove", (e) => {
-  mouse.x = e.clientX;
-  mouse.y = e.clientY;
+const scene = new THREE.Scene();
+
+const camera = new THREE.PerspectiveCamera(
+  75,
+  window.innerWidth / window.innerHeight,
+  0.1,
+  1000
+);
+camera.position.z = 30;
+
+const renderer = new THREE.WebGLRenderer({
+  canvas,
+  alpha: true,
+  antialias: true
 });
 
-function frame() {
-  ctx.clearRect(0, 0, w, h);
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-  for (const s of stars) {
-    const dx = s.x - mouse.x;
-    const dy = s.y - mouse.y;
-    const dist = Math.hypot(dx, dy);
+// 2. Create star positions and colours
+const starCount = 5000;
+const positions = new Float32Array(starCount * 3);
+const colors = new Float32Array(starCount * 3);
 
-    if (dist < 120 && dist > 0) {         // push away from the mouse
-      const push = (120 - dist) / 120;
-      s.x += (dx / dist) * push * 6;
-      s.y += (dy / dist) * push * 6;
-    }
+for (let i = 0; i < starCount; i++) {
+  const i3 = i * 3;
 
-    s.x += (s.hx - s.x) * 0.05;           // ease back home
-    s.y += (s.hy - s.y) * 0.05;
+  positions[i3] = (Math.random() - 0.5) * 200;
+  positions[i3 + 1] = (Math.random() - 0.5) * 200;
+  positions[i3 + 2] = (Math.random() - 0.5) * 200;
 
-    ctx.beginPath();
-    ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-    ctx.fillStyle = "#cfe6ff";
-    ctx.fill();
-  }
+  const color = new THREE.Color();
+  color.setHSL(
+    0.55 + Math.random() * 0.1,
+    0.5 + Math.random() * 0.5,
+    0.7 + Math.random() * 0.3
+  );
 
-  requestAnimationFrame(frame);           // run again next screen refresh
+  colors[i3] = color.r;
+  colors[i3 + 1] = color.g;
+  colors[i3 + 2] = color.b;
 }
-frame();
+
+// 3. Geometry
+const geometry = new THREE.BufferGeometry();
+geometry.setAttribute(
+  'position',
+  new THREE.BufferAttribute(positions, 3)
+);
+geometry.setAttribute(
+  'color',
+  new THREE.BufferAttribute(colors, 3)
+);
+
+// 4. Star appearance
+const material = new THREE.PointsMaterial({
+  size: 0.35,
+  sizeAttenuation: true,
+  depthWrite: false,
+  blending: THREE.AdditiveBlending,
+  vertexColors: true,
+  transparent: true,
+  opacity: 0.9
+});
+
+// 5. Add stars to scene
+const stars = new THREE.Points(geometry, material);
+scene.add(stars);
+
+// 6. Mouse interaction
+let mouseX = 0;
+let mouseY = 0;
+
+window.addEventListener('pointermove', (event) => {
+  mouseX = (event.clientX / window.innerWidth - 0.5) * 2;
+  mouseY = (event.clientY / window.innerHeight - 0.5) * 2;
+});
+
+// 7. Animation loop: smooth parallax rather than accelerating rotation.
+function animate() {
+  requestAnimationFrame(animate);
+
+  const targetRotationY = mouseX * 0.08;
+  const targetRotationX = mouseY * 0.05;
+
+  stars.rotation.y += (targetRotationY - stars.rotation.y) * 0.015 + 0.0002;
+  stars.rotation.x += (targetRotationX - stars.rotation.x) * 0.015 + 0.0001;
+
+  renderer.render(scene, camera);
+}
+
+animate();
+
+// 8. Responsive resizing
+window.addEventListener('resize', () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+});

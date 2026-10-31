@@ -1,29 +1,140 @@
-.bgsetting 
-{
+/* =========================================================
+   1. Global styles and background
+========================================================= */
+
+:root {
+  --px: 50%;
+  --py: 30%;
+  --mx: 0;
+  --my: 0;
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.bgsetting {
   margin: 0;
+  min-height: 100vh;
   font-family: "Poppins", sans-serif;
-  color: white;
-  background: linear-gradient(135deg, #000000, #061448);
-
+  color: #fff;
+  background: linear-gradient(135deg, #000000, #010c31);
 }
-/* Navbar */
-.navbar {
+
+body::before {
+  content: "";
   position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 100;
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 0.5rem 1.5rem;
-  padding: 0.9rem 1rem;
-  background: rgba(7, 11, 26, 0.75);
-  backdrop-filter: blur(8px);
-  border-bottom: 1px solid rgba(159, 216, 255, 0.2);
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(
+    circle 180px at var(--px) var(--py),
+    rgba(76, 195, 255, 0.16),
+    rgba(76, 195, 255, 0.06) 35%,
+    transparent 72%
+  );
 }
 
-.navbar a { color: #cfe6ff; text-decoration: none; }
-.navbar a:hover { color: #fff; text-decoration: underline; }
+/* =========================================================
+   2. Background layers: CSS stars, Three.js stars and comet
+========================================================= */
 
+.space {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.stars {
+  position: absolute;
+  inset: -60px;
+  transition: transform 0.25s ease-out;
+}
+
+.stars-far {
+  background-image:
+    radial-gradient(1px 1px at 20px 30px, #fff, transparent),
+    radial-gradient(1px 1px at 120px 80px, #cfe6ff, transparent),
+    radial-gradient(1px 1px at 200px 160px, #fff, transparent);
+  background-size: 220px 220px;
+  transform: translate(
+    calc(var(--mx, 0) * -15px),
+    calc(var(--my, 0) * -15px)
+  );
+}
+
+.stars-near {
+  background-image:
+    radial-gradient(2px 2px at 60px 110px, #fff, transparent),
+    radial-gradient(2px 2px at 250px 40px, #9fd8ff, transparent);
+  background-size: 340px 340px;
+  transform: perspective(800px) rotate(-4deg)
+    rotateY(calc(var(--mx, 0) * -12deg))
+    rotateX(calc(var(--my, 0) * 12deg));
+  transition: transform 0.25s ease-out;
+}
+
+#starfield {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+#comet {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  pointer-events: none;
+}
+
+/* Keep actual page content above the background layers. */
+.hero,
+.navbar,
+main,
+.footer {
+  position: relative;
+  z-index: 2;
+}
+
+/* =========================================================
+   3. Hero and equations
+========================================================= */
+
+.hero {
+  min-height: calc(100vh - 4rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: left;
+  position: relative;
+  overflow: hidden;
+  padding: 3rem 1.5rem;
+}
+
+.hero h1 {
+  font-size: clamp(2.5rem, 8vw, 6rem);
+  margin: 0;
+}
+
+.hero-text {
+  position: relative;
+  z-index: 2;
+  margin: auto 0;
+  padding: 8rem 0 3rem;
+}
 
 .eyebrow {
   letter-spacing: 0.2em;
@@ -37,102 +148,78 @@
   margin-top: 1rem;
   color: #9fd8ff;
 }
-.hero-link:hover { color: #fff; }
 
-/* Footer */
-.footer {
-  text-align: center;
-  padding: 3rem 1rem;
-  color: #a9bddb;
-}
-.footer p { margin: 0 auto 0.5rem; }
-.footer a { color: #9fd8ff; }
-
-
-.hero {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  gap: 2rem;
-  position: relative;
-  overflow: hidden;
+.hero-link:hover {
+  color: #fff;
 }
 
-.hero h1 {
-  font-size: clamp(3rem, 8vw, 6rem);
-  margin: 0;
-}
-
-/* Hero text */
-.hero-text,
-.sticker {
-  position: relative;
-  z-index: 1;               /* keep them above the equations */
-}
-
-/* Sticker image */
-
-.sticker {
-  width: min(320px, 70vw);
-  transform: rotate(0deg);
-
-  /* White sticker outline and soft drop shadow */
-
-  filter:
-    drop-shadow(4px 0 0 #fff)
-    drop-shadow(-4px 0 0 #fff)
-    drop-shadow(0 4px 0 #fff)
-    drop-shadow(0 -4px 0 #fff)
-    drop-shadow(0 10px 14px rgba(0, 0, 0, 0.6));
-}
-
-/* Glowing equations made with random positioning using Javascript*/
 .equations_section {
-    position: absolute;
-    width: 100%;
-    height: 400px;
-    overflow: hidden;
+  position: absolute;
+  inset: 0 0 auto;
+  width: 100%;
+  height: 400px;
+  overflow: hidden;
+  z-index: 1;
+  pointer-events: none;
 }
 
 .equations {
-    position: absolute;
-    inset: 0;
+  position: relative;
+  width: 100%;    height: 100%;
 }
 
 .equations span {
-    position: absolute;
-
-    font-family: "Courier New", monospace;
-    font-size: clamp(0.8rem, 1.4vw, 1.2rem);
-
-    color: #9fd8ff;
-    text-shadow: 0 0 8px #4cc3ff;
-
-    opacity: 0;
-    white-space: nowrap;
-
-    pointer-events: none;
-
-    animation: blink 4s ease-in-out infinite;
+  position: absolute;
+  font-family: "Courier New", monospace;
+  font-size: clamp(0.75rem, 1.4vw, 1.2rem);
+  color: #9fd8ff;
+  text-shadow: 0 0 8px #4cc3ff;
+  opacity: 0;
+  white-space: nowrap;
+  pointer-events: none;
+  animation: blink 4s ease-in-out infinite;
 }
 
 @keyframes blink {
-    0%, 100% {
-        opacity: 0;
-    }
-
-    50% {
-        opacity: 0.9;
-    }
+  0%, 100% { opacity: 0; }
+  50% { opacity: 0.9; }
 }
 
-/* =========================
-   GENERAL SECTIONS
-========================= */
+/* =========================================================
+   4. Navigation
+========================================================= */
 
-section:not(.hero) {
+.navbar {
+  position: sticky;
+  top: 0;
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+  padding: 0.9rem 1rem;
+  background: rgba(7, 11, 26, 0.82);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+  border-bottom: 1px solid rgba(159, 216, 255, 0.2);
+  z-index: 5;
+}
+
+.navbar a {
+  color: #cfe6ff;
+  text-decoration: none;
+}
+
+.navbar a:hover {
+  color: #fff;
+  text-shadow: 0 0 8px #4cc3ff;
+}
+
+/* =========================================================
+   5. General sections and About layout
+========================================================= */
+
+main > section {
   max-width: 60rem;
   margin: 0 auto;
   padding: 5rem 1.5rem;
@@ -148,29 +235,119 @@ p {
   max-width: 42rem;
 }
 
-/* =========================
-   SKILL PILLS
-========================= */
+.about-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(220px, 300px);
+  align-items: center;
+  gap: 2.5rem;
+}
 
-.chips {
+.about-copy p:first-child {
+  margin-top: 0;
+}
+
+.about-copy p:last-child {
+  margin-bottom: 0;
+}
+
+.about-photo {
+  display: block;
+  width: 100%;
+  max-width: 300px;
+  justify-self: end;
+  border-radius: 20px;
+  object-fit: cover;
+  border: 2px solid rgba(159, 216, 255, 0.55);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45),
+              0 0 24px rgba(76, 195, 255, 0.16);
+}
+
+/* =========================================================
+   6. Skills and progress bars
+========================================================= */
+
+.skill-grid {
   list-style: none;
   padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.8rem;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+  gap: 1.2rem;
 }
 
-.chips li {
-  padding: 0.5rem 1.1rem;
-  border: 1px solid rgba(0, 0, 0, 0.5);
-  border-radius: 1000px;
-  background: rgba(18, 60, 132, 0.821);
-  color: #ebeffa;
+.skill {
+  padding: 1.3rem 1rem 1.1rem;
+  text-align: center;
+  border-radius: 14px;
+  border: 1px solid rgba(159, 216, 255, 0.3);
+  background: rgba(10, 14, 35, 0.6);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+  animation: float 6s ease-in-out infinite;
 }
 
-/* =========================
-   EXPERTISE & CERTIFICATE CARDS
-========================= */
+.skill:hover {
+  border-color: #9fd8ff;
+  box-shadow: 0 0 18px rgba(76, 195, 255, 0.45);
+}
+
+.skill img {
+  width: 48px;
+  height: 48px;
+  margin-bottom: 0.6rem;
+}
+
+.skill h3 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.skill .level {
+  margin: 0.2rem auto 0.8rem;
+  font-size: 0.85rem;
+  color: #9fd8ff;
+}
+
+.bar {
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  overflow: hidden;
+}
+
+.bar span {
+  display: block;
+  height: 100%;
+  width: var(--level);
+  border-radius: inherit;
+  background: linear-gradient(90deg, #4cc3ff, #9fd8ff);
+  animation: fill 1.2s ease-out;
+}
+
+@keyframes fill {
+  from { width: 0; }
+  to { width: var(--level); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.skill:nth-child(2n) {
+  animation-duration: 7s;
+  animation-delay: -2s;
+}
+
+.skill:nth-child(3n) {
+  animation-duration: 5s;
+  animation-delay: -4s;
+}
+
+/* =========================================================
+   7. Expertise cards
+========================================================= */
 
 .cards {
   display: grid;
@@ -183,6 +360,7 @@ p {
   border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.15);
   background: rgba(10, 14, 35, 0.6);
+  -webkit-backdrop-filter: blur(6px);
   backdrop-filter: blur(6px);
   color: inherit;
   text-decoration: none;
@@ -198,61 +376,9 @@ p {
   margin-top: 0;
 }
 
-.cert img {
-  width: 100%;
-  border-radius: 8px;
-}
- 
-:root { --px: 50%; --py: 30%; }
-
-/*for the javascript to get the mouse position and set the CSS variables --px and --py accordingly*/
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  background: radial-gradient(
-    circle 50px at var(--px) var(--py),
-    rgba(76, 195, 255, 0.2),rgba(76, 195, 255, 0.1) 20%,
-    transparent 70%
-  );
-}
-.space {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  overflow: hidden;
-}
-
-.stars {
-  position: absolute;
-  inset: -60px;                    /* extra room so edges never show when moving */
-  transition: transform 0.25s ease-out;
-}
-
-.stars-far {
-  background-image:
-    radial-gradient(1px 1px at 20px 30px,   #fff, transparent),
-    radial-gradient(1px 1px at 120px 80px,  #cfe6ff, transparent),
-    radial-gradient(1px 1px at 200px 160px, #fff, transparent);
-  background-size: 220px 220px;
-  transform: translate(calc(var(--mx, 0) * -15px), calc(var(--my, 0) * -15px));
-}
-
-.stars-near {
-  background-image:
-    radial-gradient(2px 2px at 60px 110px,  #fff, transparent),
-    radial-gradient(2px 2px at 250px 40px,  #9fd8ff, transparent);
-  background-size: 340px 340px;
-  transform: perspective(800px) rotate(-4deg)
-    rotateY(calc(var(--mx, 0) * -12deg))
-    rotateX(calc(var(--my, 0) * 12deg));
-    transition:  transform 0.25sease-out ; 
-}
-
-/* Certificates and Achievements section */
+/* =========================================================
+   8. Certificates
+========================================================= */
 
 .cert-grid {
   display: grid;
@@ -266,11 +392,12 @@ body::before {
   border-radius: 14px;
   background: rgba(10, 14, 35, 0.6);
   border: 1px solid rgba(159, 216, 255, 0.25);
+  -webkit-backdrop-filter: blur(6px);
   backdrop-filter: blur(6px);
-  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.3s ease, border-color 0.3s ease,
+              box-shadow 0.3s ease;
 }
 
-/* lift + glow on hover (and when tabbed to with the keyboard) */
 .cert-card:hover,
 .cert-card:focus-within {
   transform: translateY(-6px) rotate(-0.6deg);
@@ -286,7 +413,7 @@ body::before {
   border: 0;
   background: none;
   border-radius: 8px;
-  overflow: hidden;           /* clips the zoom and the shine */
+  overflow: hidden;
   cursor: zoom-in;
 }
 
@@ -298,8 +425,8 @@ body::before {
 .cert-open img {
   display: block;
   width: 100%;
-  aspect-ratio: 1.414 / 1;    /* A4 landscape; change if your certificate differs */
-  object-fit: cover;          /* use "contain" if edges get cropped */
+  aspect-ratio: 1.414 / 1;
+  object-fit: cover;
   transition: transform 0.5s ease;
 }
 
@@ -307,12 +434,16 @@ body::before {
   transform: scale(1.06);
 }
 
-/* shine that sweeps across on hover */
 .cert-open::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(110deg, transparent 35%, rgba(255, 255, 255, 0.25) 50%, transparent 65%);
+  background: linear-gradient(
+    110deg,
+    transparent 35%,
+    rgba(255, 255, 255, 0.25) 50%,
+    transparent 65%
+  );
   transform: translateX(-100%);
   transition: transform 0.8s ease;
   pointer-events: none;
@@ -322,7 +453,6 @@ body::before {
   transform: translateX(100%);
 }
 
-/* "View full size" pill that slides up */
 .cert-hint {
   position: absolute;
   left: 50%;
@@ -343,50 +473,99 @@ body::before {
   transform: translate(-50%, 0);
 }
 
-/* phones have no hover, so always show the hint */
-@media (hover: none) {
-  .cert-hint { opacity: 1; transform: translate(-50%, 0); }
+.cert-card figcaption {
+  padding: 0.8rem 0.3rem 0.3rem;
 }
 
-.cert-card figcaption { padding: 0.8rem 0.3rem 0.3rem; }
-.cert-card h3 { margin: 0 0 0.2rem; font-size: 1.1rem; }
-.cert-card p  { margin: 0; color: #a9bddb; font-size: 0.9rem; }
-/* Skill chips */
-/* the container: lays the pills out in a wrapping row */
-.chips {
-  list-style: none;      /* removes the bullet points */
-  padding: 0;
+.cert-card h3 {
+  margin: 0 0 0.2rem;
+  font-size: 1.1rem;
+}
+
+.cert-card p {
   margin: 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.8rem;
+  color: #a9bddb;
+  font-size: 0.9rem;
 }
 
-/* each pill */
-.chips li {
-  padding: 0.5rem 1.1rem;
-  border: 1px solid rgba(159, 216, 255, 0.5);   /* light outline, visible on dark */
-  border-radius: 999px;
-  background: rgba(18, 60, 132, 0.8);
-  color: #ebeffa;
-  cursor: default;
-  transition: box-shadow 0.3s ease, border-color 0.3s ease, background 0.3s ease;
-  animation: float 6s ease-in-out infinite;
+/* =========================================================
+   9. Contact and footer
+========================================================= */
+
+.footer {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: #a9bddb;
 }
 
-/* hover glow */
-.chips li:hover {
-  border-color: #9fd8ff;
-  background: rgba(30, 90, 190, 0.9);
-  box-shadow: 0 0 14px rgba(76, 195, 255, 0.6);
+.footer p {
+  margin: 0 auto 0.5rem;
 }
 
-/* floating motion */
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50%      { transform: translateY(-10px); }
+.footer a {
+  color: #9fd8ff;
 }
 
-/* vary the timing so the pills don't move in sync */
-.chips li:nth-child(2n) { animation-duration: 7s; animation-delay: -2s; }
-.chips li:nth-child(3n) { animation-duration: 5s; animation-delay: -4s; }
+/* =========================================================
+   10. Responsive and accessibility settings
+========================================================= */
+
+@media (max-width: 700px) {
+  .about-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .about-photo {
+    justify-self: center;
+    width: min(75%, 280px);
+  }
+
+  .hero {
+    min-height: 85vh;
+  }
+
+  .hero-text {
+    padding-top: 10rem;
+  }
+
+  .navbar {
+    justify-content: center;
+  }
+
+  .equations_section {
+    height: 360px;
+  }
+}
+
+@media (max-width: 600px) {
+  main > section {
+    padding: 4rem 1rem;
+  }
+
+  .cert-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (hover: none) {
+  .cert-hint {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .skill,
+  .bar span,
+  .equations span {
+    animation: none;
+  }
+
+  .stars {
+    transition: none;
+  }
+}

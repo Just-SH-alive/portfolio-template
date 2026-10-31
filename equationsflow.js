@@ -1,63 +1,49 @@
-//this for placing the equations ramdomly in the hero section of the portfolio 
+// Randomly position the existing equations in the hero section.
 function placeEquations() {
+  const equations = [...document.querySelectorAll(".equations span")];
+  const container = document.querySelector(".equations");
 
-    const eqs = [...document.querySelectorAll(".equations span")];
+  // Stop safely if the expected HTML element is not present.
+  if (!container || equations.length === 0) return;
 
-    const container = document.querySelector(".equations");
+  const containerWidth = container.clientWidth;
+  const containerHeight = container.clientHeight;
+  const placed = [];
 
-    const containerWidth = container.clientWidth;
-    const containerHeight = container.clientHeight;
+  equations.forEach((element) => {
+    // Reset first so offsetWidth/offsetHeight are measured consistently.
+    element.style.left = "0px";
+    element.style.top = "0px";
 
-    const placed = [];
+    const width = element.offsetWidth;
+    const height = element.offsetHeight;
 
-    eqs.forEach(el => {
+    let x = 0;
+    let y = 0;
+    let attempts = 0;
+    let overlapping = false;
 
-        // Reset previous position
-        el.style.left = "0px";
-        el.style.top = "0px";
+    do {
+      x = Math.random() * Math.max(0, containerWidth - width);
+      y = Math.random() * Math.max(0, containerHeight * 0.7 - height);
 
-        const width = el.offsetWidth;
-        const height = el.offsetHeight;
+      overlapping = placed.some((position) =>
+        x < position.x + position.width + 20 &&
+        x + width + 20 > position.x &&
+        y < position.y + position.height + 15 &&
+        y + height + 15 > position.y
+      );
 
-        let x, y;
-        let attempts = 0;
-        let overlapping;
+      attempts++;
+    } while (overlapping && attempts < 100);
 
-        do {
+    element.style.left = `${x}px`;
+    element.style.top = `${y}px`;
+    element.style.animationDelay = `${Math.random() * 4}s`;
 
-            x = Math.random() * Math.max(0, containerWidth - width);
-            y = Math.random() * Math.max(0, containerHeight * 0.7 - height);
-
-            overlapping = placed.some(pos => {
-
-                return (
-                    x < pos.x + pos.width + 20 &&
-                    x + width + 20 > pos.x &&
-                    y < pos.y + pos.height + 15 &&
-                    y + height + 15 > pos.y
-                );
-
-            });
-
-            attempts++;
-
-        } while (overlapping && attempts < 100);
-
-        el.style.left = x + "px";
-        el.style.top = y + "px";
-
-        placed.push({
-            x,
-            y,
-            width,
-            height
-        });
-
-        el.style.animationDelay = Math.random() * 4 + "s";
-
-    });
+    placed.push({ x, y, width, height });
+  });
 }
 
-placeEquations();
-
+window.addEventListener("load", placeEquations);
 window.addEventListener("resize", placeEquations);
